@@ -1,29 +1,28 @@
 import React from "react";
-import { FaMicrosoft, FaApple } from "react-icons/fa";
-import { SiTesla } from "react-icons/si";
+import { FaSwimmingPool, FaCode, FaBook } from "react-icons/fa";
 
 const PopularCompanies = () => {
   const companies = [
     {
       id: 1,
-      title: "Microsoft",
-      location: "Houston, Texas",
+      title: "Fins Swimming Facility",
+      location: "Cypress, Texas",
       openPositions: 10,
-      icon: <FaMicrosoft />,
+      icon: <FaSwimmingPool />,
     },
     {
       id: 2,
-      title: "Tesla",
-      location: "Houston, Texas",
+      title: "Code Ninjas",
+      location: "Cypress, Texas",
       openPositions: 5,
-      icon: <SiTesla />,
+      icon: <FaCode />,
     },
     {
       id: 3,
-      title: "Apple",
-      location: "Houston, Texas",
+      title: "Kumon",
+      location: "Cypress, Texas",
       openPositions: 20,
-      icon: <FaApple />,
+      icon: <FaBook />,
     },
   ];
   return (

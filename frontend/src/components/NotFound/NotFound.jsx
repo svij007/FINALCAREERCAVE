@@ -7,7 +7,7 @@ const NotFound = () => {
         <section className='page notfound'>
           <div className="content">
             <img src="/notfound.png" alt="notfound" />
-            <Link to={'/'}>RETURN TO HOME PAGE</Link>
+            <Link to={'/'}>CONTINUE TO HOME PAGE</Link>
           </div>
         </section>
     </>

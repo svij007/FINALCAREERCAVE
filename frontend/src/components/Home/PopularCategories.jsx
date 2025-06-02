@@ -1,66 +1,67 @@
 import React from "react";
-import {
-  MdOutlineDesignServices,
-  MdOutlineWebhook,
-  MdAccountBalance,
-  MdOutlineAnimation,
+import { 
+  MdOutlineComputer, // Coding & Web Development
+  MdOutlineSchool, // Education
+  MdRestaurant, // Local Restaurants
+  MdStorefront, // Local Retail Stores
+  MdLocalShipping, // Delivery Companies
+  MdOutlineSpa, // Salons
+  MdVideocam, // Social Media Videographer
+  MdLocalHospital // Hospital & Veterinary Assistance
 } from "react-icons/md";
-import { TbAppsFilled } from "react-icons/tb";
-import { FaReact } from "react-icons/fa";
-import { GiArtificialIntelligence } from "react-icons/gi";
-import { IoGameController } from "react-icons/io5";
 
 const PopularCategories = () => {
   const categories = [
     {
       id: 1,
-      title: "Graphics & Design",
-      subTitle: "305 Open Positions",
-      icon: <MdOutlineDesignServices />,
+      title: "Coding & Web Development",
+      subTitle: "50 Open Positions",
+      icon: <MdOutlineComputer />,
     },
     {
       id: 2,
-      title: "Mobile App Development",
-      subTitle: "500 Open Positions",
-      icon: <TbAppsFilled />,
+      title: "Education",
+      subTitle: "76 Open Positions",
+      icon: <MdOutlineSchool />,
     },
     {
       id: 3,
-      title: "Frontend Web Development",
-      subTitle: "200 Open Positions",
-      icon: <MdOutlineWebhook />,
+      title: "Local Restaurants",
+      subTitle: "43 Open Positions",
+      icon: <MdRestaurant />,
     },
     {
       id: 4,
-      title: "MERN STACK Development",
-      subTitle: "1000+ Open Postions",
-      icon: <FaReact />,
+      title: "Local Retail Stores",
+      subTitle: "100 Open Positions",
+      icon: <MdStorefront />,
     },
     {
       id: 5,
-      title: "Account & Finance",
-      subTitle: "150 Open Positions",
-      icon: <MdAccountBalance />,
+      title: "Delivery Companies",
+      subTitle: "92 Open Positions",
+      icon: <MdLocalShipping />,
     },
     {
       id: 6,
-      title: "Artificial Intelligence",
-      subTitle: "867 Open Positions",
-      icon: <GiArtificialIntelligence />,
+      title: "Salons",
+      subTitle: "58 Open Positions",
+      icon: <MdOutlineSpa />,
     },
     {
       id: 7,
-      title: "Video Animation",
+      title: "Social Media Videographer",
       subTitle: "50 Open Positions",
-      icon: <MdOutlineAnimation />,
+      icon: <MdVideocam />,
     },
     {
       id: 8,
-      title: "Game Development",
+      title: "Hospital & Veterinary Assistance",
       subTitle: "80 Open Positions",
-      icon: <IoGameController />,
+      icon: <MdLocalHospital />,
     },
   ];
+
   return (
     <div className="categories">
       <h3>POPULAR CATEGORIES</h3>

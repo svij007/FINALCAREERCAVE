@@ -90,28 +90,28 @@ const PostJob = () => {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Select Category</option>
-                <option value="Graphics & Design">Graphics & Design</option>
-                <option value="Mobile App Development">
-                  Mobile App Development
+                <option value="Education">Education</option>
+                <option value="Coding & Web Development">
+                  Coding & Web Development
                 </option>
-                <option value="Frontend Web Development">
-                  Frontend Web Development
+                <option value="Local Restraunts">
+                  Local Restraunts
                 </option>
-                <option value="MERN Stack Development">
-                  MERN STACK Development
+                <option value="Salons">
+                  Salons
                 </option>
-                <option value="Account & Finance">Account & Finance</option>
-                <option value="Artificial Intelligence">
-                  Artificial Intelligence
+                <option value="Delivery Companies">Delivery Companies</option>
+                <option value="Social Media Videographer">Social Media Videographer
                 </option>
-                <option value="Video Animation">Video Animation</option>
-                <option value="MEAN Stack Development">
-                  MEAN STACK Development
+                <option value="Hospital & Veterinary Assistance">Hospital & Veterinary Assistance</option>
+                <option value="Food Banks Helpers">
+                  Food Bank Helpers
                 </option>
-                <option value="MEVN Stack Development">
-                  MEVN STACK Development
+                <option value="Life Guard">
+                  Life Guard
                 </option>
-                <option value="Data Entry Operator">Data Entry Operator</option>
+                <option value="Dog Sitting">Dog Sitting</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div className="wrapper">

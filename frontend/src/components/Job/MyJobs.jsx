@@ -256,15 +256,14 @@ const handleDeleteJob = async (jobId) => {
                           <span>Expired:</span>
                           <select
                             value={element.expired}
-                            onChange={(e) =>
-                             onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "expired",
-                                e.target.value === "true"
-                              )
-                            }
-                            disabled={
+                           onChange={(e) =>
+                            handleInputChange(
+                              element._id,
+                              "expired",
+                              e.target.value === "true"
+                            )
+                          }
+                             disabled={
                               editingMode !== element._id ? true : false
                             }
                           >

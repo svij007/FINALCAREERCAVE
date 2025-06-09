@@ -36,11 +36,12 @@ const MyApplications = () => {
 
     try {
       let url = "";
-      if (user.role === "Employer") {
-        url = "http://localhost:4000/api/v1/application/employer/getall";
-      } else if (user.role === "Job Seeker") {
-        url = "http://localhost:4000/api/v1/application/jobseeker/getall";
-      }
+if (user.role === "Employer") {
+  url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/application/employer/getall`;
+} else if (user.role === "Job Seeker") {
+  url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/application/jobseeker/getall`;
+}
+
 
       if (url) {
         const response = await axios.get(url, { withCredentials: true });
@@ -85,17 +86,18 @@ const MyApplications = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/v1/application/jobseeker/post",
-        formDataToSubmit,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          withCredentials: true,
-        }
-      );
+const response = await axios.post(
+  `${import.meta.env.VITE_BACKEND_URL}/api/v1/application/jobseeker/post`,
+  formDataToSubmit,
+  {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    withCredentials: true,
+  }
+);
+
 
       toast.success(response.data.message);
 
@@ -115,10 +117,11 @@ const MyApplications = () => {
   // Delete application
   const deleteApplication = async (id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:4000/api/v1/application/delete/${id}`,
-        { withCredentials: true }
-      );
+const response = await axios.delete(
+  `${import.meta.env.VITE_BACKEND_URL}/api/v1/application/delete/${id}`,
+  { withCredentials: true }
+);
+
       toast.success(response.data.message);
 
       // Remove the deleted application from the state

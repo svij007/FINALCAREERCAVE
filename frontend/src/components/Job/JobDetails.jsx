@@ -6,7 +6,7 @@ import { Context } from "../../main";
 const JobDetails = () => {
   const { id } = useParams(); 
   const [job, setJob] = useState(null);
-  const { isAuthorized, user } = useContext(Context);
+  const { isAuthorized, user } = useContext(Context); 
   const navigateTo = useNavigate();
 
 useEffect(() => {

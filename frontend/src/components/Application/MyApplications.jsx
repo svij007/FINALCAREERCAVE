@@ -85,7 +85,9 @@ const MyApplications = () => {
     }
 
     try {
-      axios.get(`${backendURL}/api/v1/job`)
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/application/jobseeker/post",
+        formDataToSubmit,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -113,8 +115,9 @@ const MyApplications = () => {
   // Delete application
   const deleteApplication = async (id) => {
     try {
-      axios.get(`${backendURL}/api/v1/job`);
-    
+      const response = await axios.delete(
+        `http://localhost:4000/api/v1/application/delete/${id}`,
+        { withCredentials: true }
       );
       toast.success(response.data.message);
 

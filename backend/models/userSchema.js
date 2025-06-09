@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 const userSchema = new mongoose.Schema({
   name: {
@@ -42,12 +42,12 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = await bcryptjs.hash(this.password, 10);
 });
 
 //COMPARING THE USER PASSWORD ENTERED BY USER WITH THE USER SAVED PASSWORD
 userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+  return await bcryptjs.compare(enteredPassword, this.password);
 };
 
 //GENERATING A JWT TOKEN WHEN A USER REGISTERS OR LOGINS, IT DEPENDS ON OUR CODE THAT WHEN DO WE NEED TO GENERATE THE JWT TOKEN WHEN THE USER LOGIN OR REGISTER OR FOR BOTH. 

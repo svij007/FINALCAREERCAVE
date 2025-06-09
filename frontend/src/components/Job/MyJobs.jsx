@@ -29,9 +29,12 @@ const { data } = await axios.get(
     };
     fetchJobs();
   }, []);
+  useEffect(() => {
   if (!isAuthorized || (user && user.role !== "Employer")) {
     navigateTo("/");
   }
+}, [isAuthorized, user, navigateTo]);
+
 
   //Function For Enabling Editing Mode
   const handleEnableEdit = (jobId) => {
@@ -45,38 +48,36 @@ const { data } = await axios.get(
   };
 
   //Function For Updating The Job
-  const handleUpdateJob = async (jobId) => {
-    const updatedJob = myJobs.find((job) => job._id === jobId);
-await axios.put(
-  `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/update/${jobId}`,
-  updatedJob,
-  { withCredentials: true }
-);
+const handleUpdateJob = async (jobId) => {
+  const updatedJob = myJobs.find((job) => job._id === jobId);
+  try {
+    const res = await axios.put(
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/update/${jobId}`,
+      updatedJob,
+      { withCredentials: true }
+    );
+    toast.success(res.data.message);
+    setEditingMode(null);
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Update failed");
+  }
+};
 
-      .then((res) => {
-        toast.success(res.data.message);
-        setEditingMode(null);
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
-  };
 
   //Function For Deleting Job
-  const handleDeleteJob = async (jobId) => {
-await axios.delete(
-  `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/delete/${jobId}`,
-  { withCredentials: true }
-);
+const handleDeleteJob = async (jobId) => {
+  try {
+    const res = await axios.delete(
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/delete/${jobId}`,
+      { withCredentials: true }
+    );
+    toast.success(res.data.message);
+    setMyJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Delete failed");
+  }
+};
 
-      .then((res) => {
-        toast.success(res.data.message);
-        setMyJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
-  };
 
   const handleInputChange = (jobId, field, value) => {
     // Update the job object in the jobs state with the new value
@@ -256,10 +257,11 @@ await axios.delete(
                           <select
                             value={element.expired}
                             onChange={(e) =>
+                             onChange={(e) =>
                               handleInputChange(
                                 element._id,
                                 "expired",
-                                e.target.value
+                                e.target.value === "true"
                               )
                             }
                             disabled={

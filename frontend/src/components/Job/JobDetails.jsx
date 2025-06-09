@@ -9,12 +9,13 @@ const JobDetails = () => {
   const { isAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4000/api/v1/job/${id}`, { withCredentials: true })
-      .then((res) => setJob(res.data.job))
-      .catch(() => navigateTo("/notfound"));
-  }, [id, navigateTo]);
+useEffect(() => {
+  axios
+    .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/job/${id}`, { withCredentials: true })
+    .then((res) => setJob(res.data.job))
+    .catch(() => navigateTo("/notfound"));
+}, [id, navigateTo]);
+
 
   if (!isAuthorized) {
     navigateTo("/login");

@@ -34,7 +34,7 @@ const Application = () => {
     formData.append("jobId", id);
 
     try {
-      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/someEndpoint`)
+      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/someEndpoint`);
         {
           withCredentials: true,
           headers: {

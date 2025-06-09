@@ -17,16 +17,17 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/api/v1/user/login",
-        { email, password, role },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+const { data } = await axios.post(
+  `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/login`,
+  { email, password, role },
+  {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  }
+);
+
       toast.success(data.message);
       setEmail("");
       setPassword("");

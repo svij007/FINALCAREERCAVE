@@ -17,10 +17,15 @@ useEffect(() => {
 }, [id, navigateTo]);
 
 
+useEffect(() => {
   if (!isAuthorized) {
     navigateTo("/login");
-    return null;
   }
+}, [isAuthorized, navigateTo]);
+
+if (!isAuthorized) {
+  return null;
+}
 
   if (!job) {
     return <p>Loading job details...</p>;

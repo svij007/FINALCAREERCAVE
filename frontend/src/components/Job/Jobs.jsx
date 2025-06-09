@@ -8,19 +8,20 @@ const Jobs = () => {
   const { isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
-  useEffect(() => {
-    try {
-      axios
-        .get("http://localhost:4000/api/v1/job/getall", {
-          withCredentials: true,
-        })
-        .then((res) => {
-          setJobs(res.data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+useEffect(() => {
+  try {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/job/getall`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setJobs(res.data);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+}, []);
+
 
   if (!isAuthorized) {
     navigateTo("/");

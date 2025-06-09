@@ -10,20 +10,28 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
 const app = express();
+
+// Load environment variables
 config({ path: "./config/config.env" });
 
+// Connect to DB
+dbConnection();
+
+// CORS setup to allow Vercel frontend
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
-    method: ["GET", "POST", "DELETE", "PUT"],
+    origin: process.env.FRONTEND_URL, // e.g. https://yourfrontend.vercel.app
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
+// Parse cookies and body
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// File upload support
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -31,14 +39,13 @@ app.use(
   })
 );
 
-// Middleware to set Cache-Control headers
+// Prevent caching of API responses
 app.use((req, res, next) => {
-  if (req.url.startsWith('/api')) {
-
-  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
-  res.setHeader("Pragma", "no-cache");
-  res.setHeader("Expires", "0");
-  res.setHeader("Surrogate-Control", "no-store");
+  if (req.url.startsWith("/api")) {
+    res.setHeader("Cache-Control", "no-store");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+    res.setHeader("Surrogate-Control", "no-store");
   }
   next();
 });
@@ -48,10 +55,7 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/application", applicationRouter);
 
-// Database connection
-dbConnection();
-
-// Error handling middleware
+// Error handler
 app.use(errorMiddleware);
 
 export default app;

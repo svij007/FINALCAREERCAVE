@@ -20,13 +20,15 @@ import MyJobs from "./components/Job/MyJobs";
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context);
 
-  // Fetch user once when the app loads
   useEffect(() => {
     const fetchUser = async () => {
       try {
-const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`, {
-  withCredentials: true,
-});
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`,
+          {
+            withCredentials: true,
+          }
+        );
         console.log("User fetched:", response.data.user);
         setUser(response.data.user);
         setIsAuthorized(true);
@@ -36,13 +38,11 @@ const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/use
       }
     };
 
-    // Only fetch the user if not already authorized
     if (!isAuthorized) {
       fetchUser();
     }
   }, [isAuthorized, setUser, setIsAuthorized]);
 
-  // Check if user is authorized before showing routes
   if (!isAuthorized) {
     return (
       <BrowserRouter>
@@ -63,47 +63,32 @@ const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/use
     <BrowserRouter>
       <Navbar />
       <Routes>
-  <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
 
-  {/* Shared route for viewing all jobs */}
-    <Route 
-      path="/job/getall" 
-      element={
-        user?.role === "Job Seeker" || user?.role === "Employer" 
-          ? <Jobs /> 
-          : <NotFound />
-      } 
-    />
+        {/* Jobs route available to all authenticated users */}
+        <Route path="/jobs" element={<Jobs />} />
 
-<Route
-  path="/applications/me"
-  element={
-    user?.role === "Job Seeker" || user?.role === "Employer"
-      ? <MyApplications />
-      : <NotFound />
-  }
-/>
+        {/* Applications */}
+        <Route
+          path="/applications/me"
+          element={
+            user?.role === "Job Seeker" || user?.role === "Employer"
+              ? <MyApplications />
+              : <NotFound />
+          }
+        />
 
+        {/* Job Details and Application (for Job Seekers only) */}
+        <Route path="/job/:id" element={user?.role === "Job Seeker" ? <JobDetails /> : <NotFound />} />
+        <Route path="/application/:id" element={user?.role === "Job Seeker" ? <Application /> : <NotFound />} />
 
-    {/* Job Seekers can view individual job details */}
-    <Route path="/job/:id" element={user?.role === "Job Seeker" ? <JobDetails /> : <NotFound />} />
-    
-    {/* Job Seekers can apply to a job */}
-    <Route path="/application/:id" element={user?.role === "Job Seeker" ? <Application /> : <NotFound />} />
-    
-    {/* Employers can post jobs */}
-    <Route path="/job/post" element={user?.role === "Employer" ? <PostJob /> : <NotFound />} />
-    
-    {/* Employers can view their posted jobs */}
-    <Route path="/job/me" element={user?.role === "Employer" ? <MyJobs /> : <NotFound />} />
+        {/* Employers */}
+        <Route path="/job/post" element={user?.role === "Employer" ? <PostJob /> : <NotFound />} />
+        <Route path="/job/me" element={user?.role === "Employer" ? <MyJobs /> : <NotFound />} />
 
-    <Route path="/jobs/:id" element={<JobDetails />} />
-
-
-    {/* Catch-all for unknown paths */}
-    <Route path="*" element={<NotFound />} />
-  </Routes>
-
+        {/* Catch-all */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Footer />
       <Toaster />
     </BrowserRouter>

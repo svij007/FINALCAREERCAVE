@@ -1,37 +1,33 @@
-// ErrorHandler class for creating custom error objects
-class ErrorHandler extends Error {
+export class ErrorHandler extends Error {
   constructor(message, statusCode) {
     super(message);
     this.statusCode = statusCode;
-    Error.captureStackTrace(this, this.constructor);
   }
 }
 
-// Middleware to handle errors centrally in Express
 export const errorMiddleware = (err, req, res, next) => {
-  let customError = { ...err };
-  customError.message = err.message || "Internal Server Error";
-  customError.statusCode = err.statusCode || 500;
+  err.message = err.message || "Internal Server Error";
+  err.statusCode = err.statusCode || 500;
 
-  // Handle specific Mongoose / JWT errors
   if (err.name === "CastError") {
-    customError.message = `Resource not found. Invalid ${err.path}`;
-    customError.statusCode = 400;
-  } else if (err.code === 11000) {
-    customError.message = `Duplicate ${Object.keys(err.keyValue)} entered`;
-    customError.statusCode = 400;
-  } else if (err.name === "JsonWebTokenError") {
-    customError.message = "JSON Web Token is invalid, try again!";
-    customError.statusCode = 401;
-  } else if (err.name === "TokenExpiredError") {
-    customError.message = "JSON Web Token has expired, try again!";
-    customError.statusCode = 401;
+    const message = `Resource not found. Invalid ${err.path}`;
+    err = new ErrorHandler(message, 400);
+  }
+  if (err.code === 11000) {
+    const message = `Duplicate ${Object.keys(err.keyValue)} Entered`;
+    err = new ErrorHandler(message, 400);
+  }
+  if (err.name === "JsonWebTokenError") {
+    const message = `Json Web Token is invalid, Try again!`;
+    err = new ErrorHandler(message, 400);
+  }
+  if (err.name === "TokenExpiredError") {
+    const message = `Json Web Token is expired, Try again!`;
+    err = new ErrorHandler(message, 400);
   }
 
-  res.status(customError.statusCode).json({
+  return res.status(err.statusCode).json({
     success: false,
-    message: customError.message,
+    message: err.message,
   });
 };
-
-export default ErrorHandler;

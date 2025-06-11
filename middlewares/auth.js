@@ -37,5 +37,7 @@ export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
   }
 
   req.user = user;
+  console.log('in auth');
+  console.log(user);
   next();
 });

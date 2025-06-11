@@ -16,15 +16,15 @@ config({ path: "./config/config.env" });
 
 // Connect to DB
 dbConnection();
-
+app.use(cors());
 // CORS setup to allow Vercel frontend
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL, // e.g. https://yourfrontend.vercel.app
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+//app.use(
+ // cors({
+   // origin: process.env.FRONTEND_URL, // e.g. https://yourfrontend.vercel.app
+    //methods: ["GET", "POST", "PUT", "DELETE"],
+   // credentials: true,
+//  })
+//);
 
 // Parse cookies and body
 app.use(cookieParser());

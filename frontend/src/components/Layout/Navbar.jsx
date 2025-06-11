@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/v1/user/logout",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/logout`,
         {
           withCredentials: true,
         }
@@ -51,8 +51,8 @@ const Navbar = () => {
 
 
           {/* Employer specific links */}
-         {/* {user?.role === "Employer" && (
-            <> */}
+         {user?.role === "Employer" && (
+            <> 
               <li>
                 <Link to={"/job/post"} onClick={() => setShow(false)}>
                   POST NEW JOB
@@ -68,8 +68,8 @@ const Navbar = () => {
                   APPLICANTS APPLICATIONS
                 </Link>
               </li>
-          {/* </>
-          )} */}
+           </>
+          )}
 
           {/* Logout button */}
           <button onClick={handleLogout}>LOGOUT</button>

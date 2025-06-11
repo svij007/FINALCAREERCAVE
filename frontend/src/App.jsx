@@ -32,7 +32,7 @@ const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/use
         setIsAuthorized(true);
       } catch (error) {
         console.log("Error fetching user:", error);
-        setIsAuthorized(false);
+        //setIsAuthorized(false);
       }
      
     };

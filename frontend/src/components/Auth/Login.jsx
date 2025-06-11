@@ -44,7 +44,8 @@ const { data } = await axios.post(
 
   // After setting the state and triggering a reload, the component will re-render.
   // If isAuthorized is true, Navigate to the homepage.
-  if (isAuthorized) {
+  //if (isAuthorized) {
+  if(true){
     return <Navigate to="/" />;
   }
 

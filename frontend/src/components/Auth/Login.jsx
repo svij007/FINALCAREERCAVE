@@ -38,7 +38,7 @@ const { data } = await axios.post(
       window.location.reload(); // This reloads the page to clear the cache
 
     } catch (error) {
-      setUser(  {   
+        {/* setUser(  {   
         "_id": "684990bef81b0da1f92d14f0",
         "name": "Druvan",
         "email": "hello@gmail.com",
@@ -48,7 +48,7 @@ const { data } = await axios.post(
         "createdAt": "2025-06-11T14:20:46.195Z",
         "__v": 0
    });
-      setIsAuthorized(true);
+      setIsAuthorized(true); */}
       
       toast.error(error.response.data.message);
       

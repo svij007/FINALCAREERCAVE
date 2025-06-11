@@ -40,21 +40,7 @@ const { data } = await axios.post(
     } catch (error) {
       
       toast.error(error.response.data.message);
-      data = {
-    "success": true,
-    "user": {
-        "_id": "684990bef81b0da1f92d14f0",
-        "name": "Druvan",
-        "email": "hello@gmail.com",
-        "phone": 3465889108,
-        "password": "$2a$10$Kh.HKG1qoqp7P3CmnIn9ZuE56ecZLSk7XQCyXrL5ApMxe/oY9ddJG",
-        "role": "Employer",
-        "createdAt": "2025-06-11T14:20:46.195Z",
-        "__v": 0
-    },
-    "message": "User Logged In Sucessfully !",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDk5MGJlZjgxYjBkYTFmOTJkMTRmMCIsImlhdCI6MTc0OTY3OTQ1MSwiZXhwIjoxNzc1NTk5NDUxfQ.SaGyVzM6vhHEFPwoLBqIILeeylD6IMU_NwvfqrPLOU8"
-}
+      
     }
   };
 

@@ -22,9 +22,9 @@ const { data } = await axios.post(
   { email, password, role },
   {
     headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    withCredentials: true,
+      "Content-Type": "application/json",
+    }
+    //withCredentials: true,
   }
 );
 

@@ -27,7 +27,7 @@ const { data } = await axios.post(
     withCredentials: true,
   }
 );
-
+console.log(JSON.stringify(data));
       toast.success(data.message);
       setEmail("");
       setPassword("");
@@ -38,6 +38,7 @@ const { data } = await axios.post(
       window.location.reload(); // This reloads the page to clear the cache
 
     } catch (error) {
+      console.log(JSON.stringify(error));
       toast.error(error.response.data.message);
     }
   };

@@ -37,16 +37,14 @@ const { data } = await axios.post(
       // Force a page reload to clear cache and apply changes
       window.location.reload(); // This reloads the page to clear the cache
 
-    } catch (error) {
-     
+    } catch (error) {     
       toast.error(error.response.data.message);
     }
   };
 
   // After setting the state and triggering a reload, the component will re-render.
   // If isAuthorized is true, Navigate to the homepage.
-  //if (isAuthorized) {
-  if(true){
+  if (isAuthorized) {  
     return <Navigate to="/" />;
   }
 

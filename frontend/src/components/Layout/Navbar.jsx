@@ -51,8 +51,8 @@ const Navbar = () => {
 
 
           {/* Employer specific links */}
-          {user?.role === "Employer" && (
-            <>
+         {/* {user?.role === "Employer" && (
+            <> */}
               <li>
                 <Link to={"/job/post"} onClick={() => setShow(false)}>
                   POST NEW JOB
@@ -68,8 +68,8 @@ const Navbar = () => {
                   APPLICANTS APPLICATIONS
                 </Link>
               </li>
-            </>
-          )}
+          {/* </>
+          )} */}
 
           {/* Logout button */}
           <button onClick={handleLogout}>LOGOUT</button>

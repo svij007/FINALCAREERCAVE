@@ -13,6 +13,10 @@ useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/job/getall`, {
         withCredentials: true,
+           headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
       })
       .then((res) => {
         setJobs(res.data);

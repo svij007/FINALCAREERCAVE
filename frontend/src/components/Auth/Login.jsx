@@ -23,8 +23,8 @@ const { data } = await axios.post(
   {
     headers: {
       "Content-Type": "application/json",
-    }
-    //withCredentials: true,
+    },
+    withCredentials: true,
   }
 );
 
@@ -36,20 +36,17 @@ const { data } = await axios.post(
       setIsAuthorized(true); // Set the state to authorized
 
       // Force a page reload to clear cache and apply changes
-      window.location.reload(); // This reloads the page to clear the cache
+     // window.location.reload(); // This reloads the page to clear the cache
 
-    } catch (error) {
-        
-      
-      toast.error(error.response.data.message);
-      
+    } catch (error) {       
+            toast.error(error.response.data.message);      
     }
   };
 
   // After setting the state and triggering a reload, the component will re-render.
   // If isAuthorized is true, Navigate to the homepage.
   if (isAuthorized) {  
-    return <Navigate to="/" />;
+    return <Navigate to='/' />;
   }
 
   return (

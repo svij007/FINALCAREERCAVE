@@ -10,8 +10,13 @@ const JobDetails = () => {
   const navigateTo = useNavigate();
 
 useEffect(() => {
+   const storedJwt = localStorage.getItem('token');
   axios
-    .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/job/${id}`, { withCredentials: true })
+    .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/job/${id}`, { withCredentials: true ,headers: {
+            'Authorization': storedJwt,
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json'
+          }})
     .then((res) => setJob(res.data.job))
     .catch(() => navigateTo("/notfound"));
 }, [id, navigateTo]);

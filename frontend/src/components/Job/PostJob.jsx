@@ -28,7 +28,7 @@ const PostJob = () => {
   
   const handleJobPost = async (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(user));
+    //console.log(JSON.stringify(user));
     if (salaryType === "Fixed Salary") {
       setSalaryFrom("");
       setSalaryFrom("");
@@ -77,7 +77,8 @@ const PostJob = () => {
      .catch((err) => {
   const errorMessage =
     err?.response?.data?.message || "Something went wrong. Please try again.";
-  toast.error(JSON.stringify(err));
+  //toast.error(JSON.stringify(err));
+  console.log(JSON.stringify(err));
 });
   };
 

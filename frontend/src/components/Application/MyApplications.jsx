@@ -32,6 +32,8 @@ const MyApplications = () => {
 
   // Fetch applications
   const fetchApplications = async () => {
+    const storedJwt = localStorage.getItem('token');
+    
     if (!user) return;
 
     try {
@@ -44,7 +46,11 @@ if (user.role === "Employer") {
 
 
       if (url) {
-        const response = await axios.get(url, { withCredentials: true });
+        const response = await axios.get(url, { withCredentials: true,headers: {
+            'Authorization': storedJwt,
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json'
+          } });
         console.log("Fetched Applications: ", response.data.applications);
         setApplications(response.data.applications); // Update the state with the fetched data
       }
@@ -86,13 +92,16 @@ if (user.role === "Employer") {
     }
 
     try {
+      const storedJwt = localStorage.getItem('token');
+
 const response = await axios.post(
+  
   `${import.meta.env.VITE_BACKEND_URL}/api/v1/application/jobseeker/post`,
   formDataToSubmit,
   {
     headers: {
       "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Authorization': storedJwt,
     },
     withCredentials: true,
   }
@@ -117,9 +126,15 @@ const response = await axios.post(
   // Delete application
   const deleteApplication = async (id) => {
     try {
+       const storedJwt = localStorage.getItem('token');
+
 const response = await axios.delete(
   `${import.meta.env.VITE_BACKEND_URL}/api/v1/application/delete/${id}`,
-  { withCredentials: true }
+  { withCredentials: true, headers: {
+            'Authorization': storedJwt,
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json'
+          } }
 );
 
       toast.success(response.data.message);

@@ -25,12 +25,10 @@ const App = () => {
     const fetchUser = async () => {
       try {
 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`, {
-  headers:{
-    "Content-Type":"application/json",
-  }
+  
   //withCredentials: true,
 });
-        toast.success("User fetched:", response.data.user);
+        console.log("User fetched:"+ response.data);
         setUser(response.data.user);
         setIsAuthorized(true);
       } catch (error) {

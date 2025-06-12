@@ -71,8 +71,9 @@ const PostJob = () => {
         }
       )
       .then((res) => {
-        toast.success(res.data.message);
-      })
+  const successMessage = res?.data?.message || "Job posted successfully!";
+  toast.success(successMessage);
+})
      .catch((err) => {
   const errorMessage =
     err?.response?.data?.message || "Something went wrong. Please try again.";

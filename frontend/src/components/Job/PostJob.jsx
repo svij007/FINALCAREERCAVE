@@ -17,16 +17,6 @@ const PostJob = () => {
 
   const { isAuthorized, user } = useContext(Context);
   
-// Add a request interceptor
-  axios.interceptors.request.use(
-    (config) => {
-      config.request.user = user;
-      config.headers.request.user = user;
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
-  
   const handleJobPost = async (e) => {
     e.preventDefault();
     //console.log(JSON.stringify(user));

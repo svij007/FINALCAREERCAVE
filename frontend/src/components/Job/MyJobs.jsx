@@ -14,11 +14,17 @@ const MyJobs = () => {
   const navigateTo = useNavigate();
   //Fetching all jobs
   useEffect(() => {
+    const storedJwt = localStorage.getItem('token');
     const fetchJobs = async () => {
       try {
 const { data } = await axios.get(
   `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/getmyjobs`,
-  { withCredentials: true }
+  { withCredentials: true,
+   headers: {
+            'Authorization': storedJwt,
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json'
+          },}
 );
 
         setMyJobs(data.myJobs);

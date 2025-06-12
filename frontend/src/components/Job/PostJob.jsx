@@ -20,7 +20,7 @@ const PostJob = () => {
 // Add a request interceptor
   axios.interceptors.request.use(
     (config) => {
-      config.request = user;
+      config.request.user = user;
       return config;
     },
     (error) => Promise.reject(error)

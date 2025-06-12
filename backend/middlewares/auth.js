@@ -4,6 +4,9 @@ import ErrorHandler from "./error.js";
 import jwt from "jsonwebtoken";
 
 export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
+  
+  console.log('in auth.js');
+  console.log('cookies = ' + JSON.stringify(req.cookies));
   const token = req.cookies?.token;
 
   if (!token) {
@@ -18,10 +21,12 @@ export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
   }
 
   const user = await User.findById(decoded.id).select("-password");
+  
   if (!user) {
     return next(new ErrorHandler("User not found", 404));
   }
 
   req.user = user;
+  console.log('user => ' + user);
   next();
 });

@@ -24,7 +24,7 @@ const PostJob = () => {
 
     const storedJwt = localStorage.getItem('token');
     
- console.log('localStorage => ' + JSON.stringify(storedJwt));
+ console.log('from post job localStorage => ' + JSON.stringify(storedJwt));
     //console.log(JSON.stringify(user));
     if (salaryType === "Fixed Salary") {
       setSalaryFrom("");
@@ -64,8 +64,8 @@ const PostJob = () => {
           withCredentials: true,
           headers: {
             'Authorization': storedJwt,
-        'Access-Control-Allow-Origin': '*', 
-        'Content-Type': 'application/json'
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json'
           },
         }
       )

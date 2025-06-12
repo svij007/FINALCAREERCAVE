@@ -77,7 +77,7 @@ const PostJob = () => {
      .catch((err) => {
   const errorMessage =
     err?.response?.data?.message || "Something went wrong. Please try again.";
-  toast.error(errorMessage);
+  toast.error(JSON.stringify(err));
 });
   };
 

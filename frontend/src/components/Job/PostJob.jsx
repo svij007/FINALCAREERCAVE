@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 import { Context } from "../../main";
+
 const PostJob = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -19,7 +21,7 @@ const PostJob = () => {
   
   const handleJobPost = async (e) => {
     e.preventDefault();
- 
+ console.log('Cookies => ' + JSON.stringify(Cookies.get('token')));
     //console.log(JSON.stringify(user));
     if (salaryType === "Fixed Salary") {
       setSalaryFrom("");
@@ -59,7 +61,7 @@ const PostJob = () => {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.props.cookies.get("token")
+            "Authorization": Cookies.get('token')
           },
         }
       )

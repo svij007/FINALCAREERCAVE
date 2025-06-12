@@ -21,7 +21,7 @@ import MyJobs from "./components/Job/MyJobs";
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context);
   axios.defaults.withCredentials=true;
-
+  
   // Fetch user once when the app loads
   useEffect(() => {
     const fetchUser = async () => {

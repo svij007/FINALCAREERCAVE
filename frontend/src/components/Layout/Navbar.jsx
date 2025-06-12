@@ -20,6 +20,7 @@ const Navbar = () => {
         }
       );
       toast.success(response.data.message);
+      localStorage.clear();
       setIsAuthorized(false);
       navigateTo("/login");
     } catch (error) {

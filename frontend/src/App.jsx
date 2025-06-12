@@ -17,11 +17,10 @@ import PostJob from "./components/Job/PostJob";
 import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 
-
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context);
   axios.defaults.withCredentials=true;
-   const storedJwt = localStorage.getItem('token');
+   //const storedJwt = localStorage.getItem('token');
   // Fetch user once when the app loads
   useEffect(() => {
     const fetchUser = async () => {
@@ -29,7 +28,7 @@ const App = () => {
 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`, {  
    withCredentials: true,
     headers: {
-        'Authorization': storedJwt,
+        //'Authorization': storedJwt,
         'Access-Control-Allow-Origin': '*', 
         'Content-Type': 'application/json'
     }

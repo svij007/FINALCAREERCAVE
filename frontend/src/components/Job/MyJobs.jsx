@@ -55,12 +55,17 @@ const { data } = await axios.get(
 
   //Function For Updating The Job
 const handleUpdateJob = async (jobId) => {
+   const storedJwt = localStorage.getItem('token');
   const updatedJob = myJobs.find((job) => job._id === jobId);
   try {
     const res = await axios.put(
       `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/update/${jobId}`,
       updatedJob,
-      { withCredentials: true }
+      { withCredentials: true, headers: {
+            'Authorization': storedJwt,
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json'
+          } }
     );
     toast.success(res.data.message);
     setEditingMode(null);
@@ -72,10 +77,15 @@ const handleUpdateJob = async (jobId) => {
 
   //Function For Deleting Job
 const handleDeleteJob = async (jobId) => {
+   const storedJwt = localStorage.getItem('token');
   try {
     const res = await axios.delete(
       `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/delete/${jobId}`,
-      { withCredentials: true }
+      { withCredentials: true, headers: {
+            'Authorization': storedJwt,
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json'
+          } }
     );
     toast.success(res.data.message);
     setMyJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));

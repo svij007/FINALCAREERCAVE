@@ -59,7 +59,7 @@ const PostJob = () => {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
-            "Authorization: this.props.cookies.get("token")
+            "Authorization": this.props.cookies.get("token")
           },
         }
       )

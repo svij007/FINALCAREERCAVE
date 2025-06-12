@@ -19,6 +19,7 @@ const PostJob = () => {
 
   const handleJobPost = async (e) => {
     e.preventDefault();
+    console.log(JSON.stringify(user));
     if (salaryType === "Fixed Salary") {
       setSalaryFrom("");
       setSalaryFrom("");

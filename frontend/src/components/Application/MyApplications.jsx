@@ -37,6 +37,8 @@ const MyApplications = () => {
     if (!user) return;
 
     try {
+      const storedJwt = localStorage.getItem('token');
+
       let url = "";
 if (user.role === "Employer") {
   url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/application/employer/getall`;

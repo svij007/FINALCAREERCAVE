@@ -11,6 +11,7 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const postJob = catchAsyncErrors(async (req, res, next) => {
+  console.log('in controller=>'+ req.user);
   const { role } = req.user;
   if (role === "Job Seeker") {
     return next(

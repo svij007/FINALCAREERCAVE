@@ -73,9 +73,11 @@ const PostJob = () => {
       .then((res) => {
         toast.success(res.data.message);
       })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+     .catch((err) => {
+  const errorMessage =
+    err?.response?.data?.message || "Something went wrong. Please try again.";
+  toast.error(errorMessage);
+});
   };
 
   const navigateTo = useNavigate();

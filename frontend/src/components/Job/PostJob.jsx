@@ -19,6 +19,7 @@ const PostJob = () => {
   
   const handleJobPost = async (e) => {
     e.preventDefault();
+ 
     //console.log(JSON.stringify(user));
     if (salaryType === "Fixed Salary") {
       setSalaryFrom("");
@@ -58,6 +59,7 @@ const PostJob = () => {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
+            "Authorization: this.props.cookies.get("token")
           },
         }
       )

@@ -9,11 +9,14 @@ const Jobs = () => {
   const navigateTo = useNavigate();
 
 useEffect(() => {
+  const storedJwt = localStorage.getItem('token');
+  
   try {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/job/getall`, {
         withCredentials: true,
            headers: {
+              'Authorization': storedJwt,
               "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },

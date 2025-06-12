@@ -55,7 +55,7 @@ const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/use
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

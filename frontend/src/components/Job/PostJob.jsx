@@ -21,7 +21,10 @@ const PostJob = () => {
   
   const handleJobPost = async (e) => {
     e.preventDefault();
- console.log('Cookies => ' + JSON.stringify(Cookies.get('token')));
+
+    const storedJwt = localStorage.getItem('token');
+    
+ console.log('Cookies => ' + JSON.stringify(storedJwt));
     //console.log(JSON.stringify(user));
     if (salaryType === "Fixed Salary") {
       setSalaryFrom("");
@@ -61,7 +64,7 @@ const PostJob = () => {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
-            "Authorization": Cookies.get('token')
+            "Authorization": storedJwt
           },
         }
       )

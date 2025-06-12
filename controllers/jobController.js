@@ -68,13 +68,13 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const getMyJobs = catchAsyncErrors(async (req, res, next) => {
-  const { role } = req.user;
+  {/*const { role } = req.user;
   if (role === "Job Seeker") {
     return next(
       new ErrorHandler("Job Seeker not allowed to access this resource.", 400)
     );
-  }
-  const myJobs = await Job.find({ postedBy: req.user._id });
+  }*/}
+  const myJobs = await Job.find({ postedBy: '684990bef81b0da1f92d14f0' }); //req.user._id
   res.status(200).json({
     success: true,
     myJobs,

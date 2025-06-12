@@ -58,6 +58,7 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
 
 
 export const getUser = catchAsyncErrors((req, res, next) => {
+   console.log('in user controller=>'+ req.user);
   const user = req.user;
   res.status(200).json({
     success: true,

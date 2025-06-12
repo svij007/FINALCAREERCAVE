@@ -4,9 +4,8 @@ import ErrorHandler from "./error.js";
 import jwt from "jsonwebtoken";
 
 export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
-  
   console.log('in auth.js');
-  console.log('cookies = ' + JSON.stringify(req.cookies));
+  console.log('cookies = ' + JSON.stringify(req.headers?.authorization));
   const token =  req.headers?.authorization;// req.cookies?.token;
 
   if (!token) {

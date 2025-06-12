@@ -14,13 +14,11 @@ config({ path: "./config/config.env" });
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: ["http://localhost:5173", "process.env.FRONTEND_URL"], //[process.env.FRONTEND_URL],
     method: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
 );
-
-
 
 app.use(cookieParser());
 app.use(express.json());

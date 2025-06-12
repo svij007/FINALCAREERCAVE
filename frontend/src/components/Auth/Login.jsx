@@ -30,6 +30,7 @@ const { data } = await axios.post(
 
       toast.success(data.message);
       setUser(data.user);
+      localStorage.setItem('token', data.token);
       setEmail("");
       setPassword("");
       setRole("");

@@ -59,7 +59,7 @@ const Register = () => {
             <img
               src="/loginCC2.png"
               alt="logo"
-              onClick={() => setShowInfo(true)} // Show paragraph on click
+              onClick={() => setShowInfo(prev => !prev)}
               style={{ cursor: "pointer" }}
             />
             <h3>Create a new account</h3>

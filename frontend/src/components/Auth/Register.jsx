@@ -21,6 +21,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
+      const storedJwt = localStorage.getItem('token');
 const { data } = await axios.post(
   `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/register`,
   { name, phone, email, role, password },

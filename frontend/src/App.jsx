@@ -26,7 +26,7 @@ const App = () => {
     const fetchUser = async () => {
       try {
 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`, {  
-  const storedJwt = localStorage.getItem('token');
+  
    withCredentials: true,
     headers: {
         'Authorization': storedJwt,

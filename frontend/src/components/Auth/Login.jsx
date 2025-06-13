@@ -53,7 +53,7 @@ const Login = () => {
             <img
               src="/loginCC2.png"
               alt="logo"
-              onClick={() => setShowInfo(true)} // Show paragraph on logo click
+              onClick={() => setShowInfo(prev => !prev)}
               style={{ cursor: "pointer" }}
             />
             <h3>Login to your account</h3>

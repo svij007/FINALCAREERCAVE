@@ -8,46 +8,41 @@ import toast from "react-hot-toast";
 import { Context } from "../../main";
 
 const Login = () => {
-  const [email, setEmail] = useState(""); 
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [showInfo, setShowInfo] = useState(false); // New state for info message
 
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-const { data } = await axios.post(
-  `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/login`,
-  { email, password, role },
-  {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  }
-);
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/login`,
+        { email, password, role },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
 
       toast.success(data.message);
       setUser(data.user);
-      localStorage.setItem('token', data.token);
+      localStorage.setItem("token", data.token);
       setEmail("");
       setPassword("");
       setRole("");
-      setIsAuthorized(true); // Set the state to authorized
-
-      // Force a page reload to clear cache and apply changes
-     // window.location.reload(); // This reloads the page to clear the cache
-
-    } catch (error) {       
-            toast.error(error.response.data.message);      
+      setIsAuthorized(true);
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 
-  // After setting the state and triggering a reload, the component will re-render.
-  // If isAuthorized is true, Navigate to the homepage.
-  if (isAuthorized) {  
-    return <Navigate to='/' />;
+  if (isAuthorized) {
+    return <Navigate to="/" />;
   }
 
   return (
@@ -55,8 +50,18 @@ const { data } = await axios.post(
       <section className="authPage">
         <div className="container">
           <div className="header">
-            <img src="/loginCC2.png" alt="logo" />
+            <img
+              src="/loginCC2.png"
+              alt="logo"
+              onClick={() => setShowInfo(true)} // Show paragraph on logo click
+              style={{ cursor: "pointer" }}
+            />
             <h3>Login to your account</h3>
+            {showInfo && (
+              <p className="infoMessage" style={{ marginTop: "10px", color: "#555" }}>
+                Hello there! Welcome to Career Cave: Your Ultimate Job Portal. Whether you're here to apply for a job, post a job, or simply upload your resume, we've got you covered. Dive into your job-seeking adventure by registering an account, or if you're already a member, feel free to log in. Good luck, and we hope you find exactly what you're looking for!
+              </p>
+            )}
           </div>
           <form>
             <div className="inputTag">

@@ -35,6 +35,7 @@ withCredentials: true,
 
 toast.success(data.message);
 setUser(data.user);
+localStorage.setItem('token', data.token);
 setName("");
 setEmail("");
 setPassword("");
@@ -42,7 +43,7 @@ setPhone("");
 setRole("");
 setIsAuthorized(true);
 } catch (error) {
-toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
 }
 };
 

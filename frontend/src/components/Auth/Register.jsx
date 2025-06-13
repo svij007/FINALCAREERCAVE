@@ -26,10 +26,13 @@ const { data } = await axios.post(
   `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/register`,
   { name, phone, email, role, password },
   {
-    headers: {
-      "Content-Type": "application/json",
-    },
+    
     withCredentials: true,
+    headers: {
+            'Authorization': storedJwt,
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json'
+          }
   }
 );
 

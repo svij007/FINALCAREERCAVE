@@ -19,38 +19,47 @@ import MyJobs from "./components/Job/MyJobs";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context);
-  axios.defaults.withCredentials=true;
-   const storedJwt = localStorage.getItem('token');
+  axios.defaults.withCredentials = true;
+  const storedJwt = localStorage.getItem('token');
+
   // Fetch user once when the app loads
   useEffect(() => {
     const fetchUser = async () => {
       try {
-const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`, {  
-  
-   withCredentials: true,
-    headers: {
-        'Authorization': storedJwt,
-        'Access-Control-Allow-Origin': '*', 
-        'Content-Type': 'application/json'
-    }
-});
-        console.log("User fetched:"+ response.data);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`, {
+          withCredentials: true,
+          headers: {
+            'Authorization': storedJwt,
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log("User fetched:" + response.data);
         setUser(response.data.user);
         setIsAuthorized(true);
       } catch (error) {
         console.log("Error fetching user:", error);
         setIsAuthorized(false);
       }
-     
     };
 
-    // Only fetch the user if not already authorized
     if (!isAuthorized) {
       fetchUser();
     }
   }, [isAuthorized, setUser, setIsAuthorized]);
 
-  // Check if user is authorized before showing routes
+  // Tidio script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = '//code.tidio.co/hdzqqce7ccqyciwbteifmhjdkebklchh.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   if (!isAuthorized) {
     return (
       <BrowserRouter>
@@ -71,46 +80,38 @@ const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/use
     <BrowserRouter>
       <Navbar />
       <Routes>
-  <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
 
-  {/* Shared route for viewing all jobs */}
-    <Route 
-      path="/job/getall" 
-      element={
-        user?.role === "Job Seeker" || user?.role === "Employer" 
-          ? <Jobs /> 
-          : <NotFound />
-      } 
-    />
+        <Route
+          path="/job/getall"
+          element={
+            user?.role === "Job Seeker" || user?.role === "Employer"
+              ? <Jobs />
+              : <NotFound />
+          }
+        />
 
-<Route
-  path="/applications/me"
-  element={
-    user?.role === "Job Seeker" || user?.role === "Employer"
-      ? <MyApplications />
-      : <NotFound />
-  }
-/>
+        <Route
+          path="/applications/me"
+          element={
+            user?.role === "Job Seeker" || user?.role === "Employer"
+              ? <MyApplications />
+              : <NotFound />
+          }
+        />
 
+        <Route path="/job/:id" element={user?.role === "Job Seeker" ? <JobDetails /> : <NotFound />} />
 
-    {/* Job Seekers can view individual job details */}
-    <Route path="/job/:id" element={user?.role === "Job Seeker" ? <JobDetails /> : <NotFound />} />
-    
-    {/* Job Seekers can apply to a job */}
-    <Route path="/application/:id" element={user?.role === "Job Seeker" ? <Application /> : <NotFound />} />
-    
-    {/* Employers can post jobs */}
-    <Route path="/job/post" element={user?.role === "Employer" ? <PostJob /> : <NotFound />} />
-    
-    {/* Employers can view their posted jobs */}
-    <Route path="/job/me" element={user?.role === "Employer" ? <MyJobs /> : <NotFound />} />
+        <Route path="/application/:id" element={user?.role === "Job Seeker" ? <Application /> : <NotFound />} />
 
-    <Route path="/jobs/:id" element={<JobDetails />} />
+        <Route path="/job/post" element={user?.role === "Employer" ? <PostJob /> : <NotFound />} />
 
+        <Route path="/job/me" element={user?.role === "Employer" ? <MyJobs /> : <NotFound />} />
 
-    {/* Catch-all for unknown paths */}
-    <Route path="*" element={<NotFound />} />
-  </Routes>
+        <Route path="/jobs/:id" element={<JobDetails />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
 
       <Footer />
       <Toaster />
@@ -119,3 +120,4 @@ const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/use
 };
 
 export default App;
+

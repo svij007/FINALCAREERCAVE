@@ -365,7 +365,7 @@ const handleDeleteJob = async (jobId) => {
             </>
           ) : (
             <p>
-              You've not posted any job or may be you deleted all of your jobs!
+              You've not posted any job or maybe you deleted all of your jobs!
             </p>
           )}
         </div>

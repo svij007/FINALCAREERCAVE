@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -18,17 +18,24 @@ const PostJob = () => {
   const [salaryType, setSalaryType] = useState("default");
 
   const { isAuthorized, user } = useContext(Context);
-  
+  const navigateTo = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthorized || (user && user.role !== "Employer")) {
+      navigateTo("/");
+    }
+  }, [isAuthorized, user, navigateTo]);
+
   const handleJobPost = async (e) => {
     e.preventDefault();
+    console.log("Submitting job post");
 
     const storedJwt = localStorage.getItem('token');
-    
- console.log('from post job localStorage => ' + JSON.stringify(storedJwt));
-    //console.log(JSON.stringify(user));
+    console.log('from post job localStorage => ' + JSON.stringify(storedJwt));
+
     if (salaryType === "Fixed Salary") {
       setSalaryFrom("");
-      setSalaryFrom("");
+      setSalaryTo("");
     } else if (salaryType === "Ranged Salary") {
       setFixedSalary("");
     } else {
@@ -36,10 +43,9 @@ const PostJob = () => {
       setSalaryTo("");
       setFixedSalary("");
     }
-    await axios
-.post(
-  `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/post`,
 
+    try {
+      const payload =
         fixedSalary.length >= 4
           ? {
               title,
@@ -59,32 +65,28 @@ const PostJob = () => {
               location,
               salaryFrom,
               salaryTo,
-            },
+            };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/job/post`,
+        payload,
         {
           withCredentials: true,
           headers: {
             'Authorization': storedJwt,
-            'Access-Control-Allow-Origin': '*', 
+            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json'
           },
         }
-      )
-      .then((res) => {
-  const successMessage = res?.data?.message || "Job posted successfully!";
-  toast.success(successMessage);
-})
-     .catch((err) => {
-  //const errorMessage =
-    //err?.response?.data?.message || "Something went wrong. Please try again.";
-  //toast.error(JSON.stringify(err));
-  console.log(JSON.stringify(err));
-});
-  };
+      );
 
-  const navigateTo = useNavigate();
-  if (!isAuthorized || (user && user.role !== "Employer")) {
-    navigateTo("/");
-  }
+      const successMessage = res?.data?.message || "Job posted successfully!";
+      toast.success(successMessage);
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <>

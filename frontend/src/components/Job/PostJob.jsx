@@ -1,8 +1,7 @@
- import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie';
 import { Context } from "../../main";
 
 const PostJob = () => {
@@ -46,7 +45,7 @@ const PostJob = () => {
 
     try {
       const payload =
-        fixedSalary.length >= 4
+        fixedSalary
           ? {
               title,
               description,
@@ -89,115 +88,102 @@ const PostJob = () => {
   };
 
   return (
-    <>
-      <div className="job_post page">
-        <div className="container">
-          <h3>POST NEW JOB</h3>
-          <form onSubmit={handleJobPost}>
-            <div className="wrapper">
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Job Title"
-              />
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="">Select Category</option>
-                <option value="Education">Education</option>
-                <option value="Coding & Web Development">
-                  Coding & Web Development
-                </option>
-                <option value="Local Restraunts">
-                  Local Restraunts
-                </option>
-                <option value="Salons">
-                  Salons
-                </option>
-                <option value="Delivery Companies">Delivery Companies</option>
-                <option value="Social Media Videographer">Social Media Videographer
-                </option>
-                <option value="Hospital & Veterinary Assistance">Hospital & Veterinary Assistance</option>
-                <option value="Food Banks Helpers">
-                  Food Bank Helpers
-                </option>
-                <option value="Life Guard">
-                  Life Guard
-                </option>
-                <option value="Dog Sitting">Dog Sitting</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div className="wrapper">
-              <input
-                type="text"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                placeholder="Country"
-              />
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                placeholder="City"
-              />
-            </div>
+    <div className="job_post page">
+      <div className="container">
+        <h3>POST NEW JOB</h3>
+        <form onSubmit={handleJobPost}>
+          <div className="wrapper">
             <input
               type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="Location"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Job Title"
             />
-            <div className="salary_wrapper">
-              <select
-                value={salaryType}
-                onChange={(e) => setSalaryType(e.target.value)}
-              >
-                <option value="default">Select Salary Type</option>
-                <option value="Fixed Salary">Fixed Salary</option>
-                <option value="Ranged Salary">Ranged Salary</option>
-              </select>
-              <div>
-                {salaryType === "default" ? (
-                  <p>Please provide Salary Type *</p>
-                ) : salaryType === "Fixed Salary" ? (
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Select Category</option>
+              <option value="Education">Education</option>
+              <option value="Coding & Web Development">Coding & Web Development</option>
+              <option value="Local Restraunts">Local Restraunts</option>
+              <option value="Salons">Salons</option>
+              <option value="Delivery Companies">Delivery Companies</option>
+              <option value="Social Media Videographer">Social Media Videographer</option>
+              <option value="Hospital & Veterinary Assistance">Hospital & Veterinary Assistance</option>
+              <option value="Food Banks Helpers">Food Bank Helpers</option>
+              <option value="Life Guard">Life Guard</option>
+              <option value="Dog Sitting">Dog Sitting</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div className="wrapper">
+            <input
+              type="text"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              placeholder="Country"
+            />
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="City"
+            />
+          </div>
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Location"
+          />
+          <div className="salary_wrapper">
+            <select
+              value={salaryType}
+              onChange={(e) => setSalaryType(e.target.value)}
+            >
+              <option value="default">Select Salary Type</option>
+              <option value="Fixed Salary">Fixed Salary</option>
+              <option value="Ranged Salary">Ranged Salary</option>
+            </select>
+            <div>
+              {salaryType === "default" ? (
+                <p>Please provide Salary Type *</p>
+              ) : salaryType === "Fixed Salary" ? (
+                <input
+                  type="number"
+                  placeholder="Enter Fixed Salary"
+                  value={fixedSalary}
+                  onChange={(e) => setFixedSalary(e.target.value)}
+                />
+              ) : (
+                <div className="ranged_salary">
                   <input
                     type="number"
-                    placeholder="Enter Fixed Salary"
-                    value={fixedSalary}
-                    onChange={(e) => setFixedSalary(e.target.value)}
+                    placeholder="Salary From"
+                    value={salaryFrom}
+                    onChange={(e) => setSalaryFrom(e.target.value)}
                   />
-                ) : (
-                  <div className="ranged_salary">
-                    <input
-                      type="number"
-                      placeholder="Salary From"
-                      value={salaryFrom}
-                      onChange={(e) => setSalaryFrom(e.target.value)}
-                    />
-                    <input
-                      type="number"
-                      placeholder="Salary To"
-                      value={salaryTo}
-                      onChange={(e) => setSalaryTo(e.target.value)}
-                    />
-                  </div>
-                )}
-              </div>
+                  <input
+                    type="number"
+                    placeholder="Salary To"
+                    value={salaryTo}
+                    onChange={(e) => setSalaryTo(e.target.value)}
+                  />
+                </div>
+              )}
             </div>
-            <textarea
-              rows="10"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Job Description"
-            />
-            <button type="submit">Create Job</button>
-          </form>
-        </div>
+          </div>
+          <textarea
+            rows="10"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Job Description"
+          />
+          <button type="submit">Create Job</button>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

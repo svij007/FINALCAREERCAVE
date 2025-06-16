@@ -8,7 +8,7 @@ const PopularCompanies = () => {
       title: "The Comic Valut",
       location: "Cypress, Texas",
       openPositions: 10,
-      icon: <FaBook />,
+      icon: <FaUserSecret />,
     },
     {
       id: 2,

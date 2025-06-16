@@ -5,21 +5,21 @@ const PopularCompanies = () => {
   const companies = [
     {
       id: 1,
-      title: "Fins Swimming Facility",
+      title: "The Comic Valut",
       location: "Cypress, Texas",
       openPositions: 10,
-      icon: <FaSwimmingPool />,
+      icon: <FaComicBook />,
     },
     {
       id: 2,
-      title: "Code Ninjas",
+      title: "iCode",
       location: "Cypress, Texas",
       openPositions: 5,
       icon: <FaCode />,
     },
     {
       id: 3,
-      title: "Kumon",
+      title: "Best Brains",
       location: "Cypress, Texas",
       openPositions: 20,
       icon: <FaBook />,

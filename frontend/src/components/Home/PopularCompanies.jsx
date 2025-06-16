@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSwimmingPool, FaCode, FaBook } from "react-icons/fa";
+import { FaBolt, FaCode, FaBook } from "react-icons/fa";
 
 const PopularCompanies = () => {
   const companies = [
@@ -8,7 +8,7 @@ const PopularCompanies = () => {
       title: "The Comic Valut",
       location: "Cypress, Texas",
       openPositions: 10,
-      icon: <FaBook />,
+      icon: <FaBolt />,
     },
     {
       id: 2,

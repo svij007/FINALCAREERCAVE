@@ -11,19 +11,19 @@ const HeroSection = () => {
     },
     {
       id: 2,
-      title: "100",
+      title: "30",
       subTitle: "Companies",
       icon: <FaBuilding />,
     },
     {
       id: 3,
-      title: "200",
+      title: "100",
       subTitle: "Job Seekers",
       icon: <FaUsers />,
     },
     {
       id: 4,
-      title: "50",
+      title: "30",
       subTitle: "Employers",
       icon: <FaUserPlus />,
     },
